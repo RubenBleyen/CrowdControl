@@ -10,11 +10,15 @@ import darknet
 from detected_object import Detection
 
 network, class_names, class_colors = darknet.load_network(
+    #"./cfg/yolov4-wheelchair",
+    #"./data/obj.data",
+    #"yolov4-wheelchair_final_second.weights",
     "./cfg/yolov4.cfg",
     "./cfg/coco.data",
     "yolov4.weights",
     1
 )
+
 frame_queue = Queue()
 darknet_image_queue = Queue(maxsize=1)
 detections_queue = Queue(maxsize=1)
@@ -26,10 +30,10 @@ height = darknet.network_height(network)
 last_detection_list = []
 last_frame_list = []
 detection_list = []
-source_list = [0 ,"wheelchair.mp4", "pushing.mp4"]
+source_list = [  "wheelchair.mp4", 0, "rtsp://ubnt:Ferr0l0gic1@192.168.99.41:554/s1"]
 count = 0
 source = 0
-
+#cap = cv2.VideoCapture("rtsp://ubnt:Ferr0l0gic1@192.168.99.41:554/s1")
 def get_source():
     print(source)
     return source
